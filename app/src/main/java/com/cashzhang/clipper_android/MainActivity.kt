@@ -2,7 +2,9 @@ package com.cashzhang.clipper_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.cashzhang.clipper_android.network.NetworkService
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +14,14 @@ class MainActivity : AppCompatActivity() {
 
         confim.setOnClickListener {
             NetworkService.send(editText.text.toString())
-                .subscribe()
+                .subscribeBy(
+                    onComplete = {
+                        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                    },
+                    onError = {
+
+                    }
+                )
         }
     }
 }
