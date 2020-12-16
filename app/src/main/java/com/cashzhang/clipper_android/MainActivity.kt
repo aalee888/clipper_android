@@ -16,10 +16,11 @@ class MainActivity : AppCompatActivity() {
             NetworkService.send(editText.text.toString())
                 .subscribeBy(
                     onComplete = {
+                        editText.setText("")
                         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
                     },
                     onError = {
-
+                        Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show()
                     }
                 )
         }
